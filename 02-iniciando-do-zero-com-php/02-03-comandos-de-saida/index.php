@@ -7,7 +7,6 @@ fullStackPHPClassName("02.03 - Comandos de saída");
  */
 fullStackPHPClassSession("echo", __LINE__);
 
-echo 'teste';
 /**
  * [ print ] https://php.net/manual/pt_BR/function.print.php
  */
