@@ -7,6 +7,31 @@ fullStackPHPClassName("02.03 - Comandos de saída");
  */
 fullStackPHPClassSession("echo", __LINE__);
 
+echo "<p>Olá Mundo!", " ", "<span class='tag'>#boraProgramar!<span>", "</p>";
+
+$hello = "Olá Mundo!";
+$code = "<span class='tag'>#boraProgramar!<span>";
+
+echo "<p>$hello</p>";
+echo '<p>$hello</p>';
+
+$day = "dia";
+
+echo "<p>Falta 1 $day para o evento!</p>";
+echo "<p>Faltam 2 {$day}s para o evento!</p>";
+
+echo "<h3>{$hello}</h3>";
+echo "<h3>{$hello} {$code}</h3>";
+
+echo "<h3>" . $hello  . " " . $code . "</h3>";
+
+?>
+
+<h4><?= $hello;?> <?= $code ;?></h4>
+
+<?php
+
+
 /**
  * [ print ] https://php.net/manual/pt_BR/function.print.php
  */
