@@ -58,14 +58,5 @@ if ($_FILES && !empty($_FILES['file']['name'])) {
 
 }
 
-
-
-
-
-
-
-
-
-
 include __DIR__ . "/form.php";
 var_dump(scandir(__DIR__ . "/uploads"));
