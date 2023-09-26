@@ -11,12 +11,37 @@ use Source\Database\Connect;
  */
 fullStackPHPClassSession("fetch", __LINE__);
 
+$connect = Connect::getInstance();
+$read = $connect->query("SELECT * FROM users LIMIT 3");
+
+if (!$read->rowCount()) {
+    echo "<p class='trigger warning'>Não obteve resultados.</p>";
+} else {
+    var_dump($read->fetch(), "<br><br>");
+
+    while ($user = $read->fetch()) {
+        var_dump($user, "<br><br>");
+    }
+
+    var_dump($read->fetch());
+}
 
 /*
  * [ fetch all ] http://php.net/manual/pt_BR/pdostatement.fetchall.php
  */
 fullStackPHPClassSession("fetch all", __LINE__);
 
+$read = $connect->query("SELECT * FROM users LIMIT 3,2");
+
+// while ($user = $read->fetch()) {
+//     var_dump($user);
+// }
+
+foreach ($read->fetchAll() as $user) {
+    var_dump($user);
+}
+
+var_dump("<br><br>",$read->fetchAll());
 
 /*
  * [ fetch save ] Realziar um fetch diretamente em um PDOStatement resulta em um clear no buffer da consulta. Você
@@ -24,10 +49,42 @@ fullStackPHPClassSession("fetch all", __LINE__);
  */
 fullStackPHPClassSession("fetch save", __LINE__);
 
+$read = $connect->query("SELECT * FROM users LIMIT 5,1");
+$result = $read->fetchAll();
+
+var_dump(
+    $read->fetchAll(),
+    "<br><br>",
+    $result,
+    "<br><br>",
+    $result,
+);
 
 /*
  * [ fetch modes ] http://php.net/manual/pt_BR/pdostatement.fetch.php
  */
 fullStackPHPClassSession("fetch styles", __LINE__);
 
+$read = $connect->query("SELECT * FROM users LIMIT 1");
+foreach ($read->fetchAll() as $user) {
+    var_dump($user,"<br><br>",$user->first_name,"<br><br>",);
+}
 
+$read = $connect->query("SELECT * FROM users LIMIT 1");
+foreach ($read->fetchAll(PDO::FETCH_NUM) as $user) {
+    var_dump("<br><br>", $user,"<br><br>",$user[1]);
+}
+
+$read = $connect->query("SELECT * FROM users LIMIT 1");
+foreach ($read->fetchAll(PDO::FETCH_ASSOC) as $user) {
+    var_dump("<br><br>", $user,"<br><br>",$user['first_name']);
+}
+
+
+$read = $connect->query("SELECT * FROM users LIMIT 1");
+foreach ($read->fetchAll(PDO::FETCH_CLASS, \Source\Database\Entity\UserEntity::class) as $user) {
+    /**
+     * @var \Source\Database\Entity\UserEntity $user
+     */
+    var_dump("<br><br>", $user,"<br><br>", $user->getFirstName());
+}
