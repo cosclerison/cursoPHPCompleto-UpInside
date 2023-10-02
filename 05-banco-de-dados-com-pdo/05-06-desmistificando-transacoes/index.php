@@ -23,6 +23,8 @@ use Source\Database\Connect;
  */
 fullStackPHPClassSession("transaction", __LINE__);
 
+/* The code block enclosed in the `try` statement is attempting to execute a series of database
+operations as a single transaction. */
 try {
 
     $pdo = Connect::getInstance();
